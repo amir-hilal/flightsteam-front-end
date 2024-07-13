@@ -18,6 +18,7 @@
     height: 100vh;
     overflow-x: hidden;
   }
+
   
   nav {
     display: flex;
@@ -63,6 +64,26 @@
     border: none;
     border-radius: 6px;
   }
+  .navbar-links-register {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    margin-right: 50px;
+  }
+  
+  .navbar-links-register a {
+    color: #000;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  
+  .navbar-links-register :last-child {
+    color: white;
+    background-color: var(--primary-color);
+    padding: 7px;
+    border: none;
+    border-radius: 6px;
+  }
   
   
   .form {
@@ -82,6 +103,12 @@
     object-fit: cover;
   }
   
+  .img-register {
+    width: 50%;
+    height: 600px;
+    object-fit: cover;
+  }
+  
   .login {
     padding: 2rem;
     width: 50%;
@@ -90,20 +117,20 @@
     justify-content: center;
     align-items: center;
   }
-  
-  
-  
-  .login-btn {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.4s;
+  .register {
+    padding: 2rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 80vh; */
   }
   
-  .spacing .login-btn:hover {
+  
+  
+  
+  .spacing .login-btn:hover , .sign-up-btn:hover {
     background-color: #d2513498;
     transition: 0.4s;
   }
@@ -114,7 +141,7 @@
 .spacing{
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
     align-items: start;
 }
 
@@ -123,7 +150,7 @@
     margin-bottom: 24px;
 }
 
-.login-btn{
+.login-btn , .sign-up-btn{
     height: 35px;
     width: 270px;
     font-weight: bold;
@@ -132,6 +159,8 @@
     border: none;
     border-radius: 2px;
     cursor: pointer;
+    color: white;
+    transition: 0.4s;
 }
 
 
