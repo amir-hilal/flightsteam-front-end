@@ -1,0 +1,215 @@
+:root {
+  --primary-color: #d25134;
+  --secondary-color: #36454f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  background-image: url(/assets/images/plane.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+.navbar {
+  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar h2 {
+  color: var(--secondary-color);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.navbar-links a {
+  color: #000;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.navbar-links :last-child {
+  color: white;
+  background-color: var(--primary-color);
+  padding: 7px;
+  border: none;
+  border-radius: 6px;
+}
+
+.ticket-flight-filter {
+  align-self: center;
+  margin-top: 22rem;
+  background-color: #ffffff99;
+  backdrop-filter: blur(20px);
+  width: 80%;
+  height: 15rem;
+  border-radius: 15px;
+  box-shadow: 0px 10px 40px -10px var(--secondary-color);
+}
+
+.links-group {
+  display: flex;
+  font-size: 1.3rem;
+  font-weight: 700;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.links-group a {
+  color: #000;
+  text-decoration: none;
+}
+
+.active-link {
+  color: #000;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.filters {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.filters :first-child {
+  display: flex;
+}
+
+#departure {
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+}
+#arrival {
+  border-radius: 0px 8px 8px 0;
+}
+
+.ticket-filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ticket-filter select {
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.ticket-filter :last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-icon {
+  padding: 8px;
+  text-align: center;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border-radius: 50%;
+}
+
+.filters :first-child .filter-icon {
+  background-color: var(--primary-color);
+}
+
+.btn-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 1.2rem 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#date-input {
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+}
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.ticket {
+  padding: 20px;
+  border-radius: 15px;
+  width: 70%;
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  box-shadow: 0px 10px 40px -10px var(--secondary-color);
+}
+
+.ticket span {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  grid-row: 1 / -1;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.ticket button {
+  grid-row: -2 / -1;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.btn-info {
+  background: none;
+}
+.btn-book {
+  grid-column: -2 / -1;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+}
