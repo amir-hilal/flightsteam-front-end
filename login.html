@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Login Page</title>
+    <link rel="stylesheet" href="styles/login.css" />
+  </head>
+  <body>
+    <div class="container">
+        <nav>
+            <h2>FLIGHTSTEAM</h2>
+          <div class="navbar-links">
+            <a href="index.html" class="active-link">Home</a>
+            <a href="chatbot.html">Flightsteam AI</a>
+            <a href="login.html">Log in</a>
+            <a href="signup.html">Sign up</a>
+          </div>
+        </nav>
+      <div class="form">
+        <img src="assets/images/image.jpg" alt="Nature image" class="img" />
+        <div class="login">
+            <form action="/login" method="post">
+                <div class="spacing">
+                    <p>Welcome Back!</p>
+                    <p class="header">Log in to your Account</p>
+                    <label>E-mail</label>
+                    <input type="email" required placeholder="example@gmail.com">
+                    <label>Password</label>
+                    <input type="password" required placeholder="********">
+                    <a href="#">Forgot Password?</a>
+                    <button type="submit" class="login-btn">Log in</button>
+                    <p>Don't have an account? <a href="register.html">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
