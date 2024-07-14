@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flightsteam</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/landingPage.css" />
+    <link rel="stylesheet" href="styles/mediaQueryLanding.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
   </head>
   <body>
     <main>
@@ -22,13 +22,55 @@
             <a href="login.html">Log in</a>
             <a href="signup.html">Sign up</a>
           </div>
+
+          <button class="btn-open-menu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7142857142857142"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-align-justify"
+            >
+              <line x1="3" x2="21" y1="6" y2="6" />
+              <line x1="3" x2="21" y1="12" y2="12" />
+              <line x1="3" x2="21" y1="18" y2="18" />
+            </svg>
+          </button>
+          <button class="btn-close-menu closed">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+          <div class="menu closed">
+            <a href="index.html">Home</a>
+            <a href="chatbot.html">Flightsteam AI</a>
+            <a href="login.html">Log in</a>
+            <a href="signup.html">Sign up</a>
+          </div>
         </nav>
         <div class="ticket-flight-filter">
-          <div class="links-group">
-            <a href="/" class="tickets-link active-link">Buy Tickets</a>
-            <a href="/" class="search-link">Search Flights</a>
+          <div class="btn-group">
+            <button class="btn-buy-search active" id="buy">Buy Tickets</button>
+            <button class="btn-buy-search" id="Search">Search Flights</button>
           </div>
-          <div class="filters">
+          <div class="filters show">
             <div>
               <div class="ticket-filter" id="departure">
                 <div class="filter-icon">
@@ -176,9 +218,49 @@
               <p>Search</p>
             </a>
           </div>
+          <div class="search hide">
+            <div class="search-flight">
+              <p>Search by flight number</p>
+              <input
+                type="text"
+                placeholder="Search for flights"
+                id="search-input"
+              />
+              <button class="btn-search-flight">search</button>
+            </div>
+            <div class="info">
+              <h3>Departure</h3>
+              <span>Beirut-lebanon</span>
+              <p>Thursday-july-18-2024</p>
+              <p>12:30 AM</p>
+              <span>MEA</span>
+            </div>
+            <div class="direction">
+              <p>••••••••••••</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+                width="24"
+                height="24"
+              >
+                <path
+                  d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"
+                />
+              </svg>
+              <p>••••••••••••</p>
+            </div>
+            <div class="info">
+              <h3>Arrival</h3>
+              <span>Beirut-lebanon</span>
+              <p>Thursday-july-18-2024</p>
+              <p>12:30 AM</p>
+              <span>MEA</span>
+            </div>
+          </div>
         </div>
       </header>
-      <section class="tickets" id="tickets-section">
+
+      <section class="tickets show" id="tickets-section">
         <div class="ticket">
           <div class="company">
             <svg
@@ -207,43 +289,76 @@
           </div>
 
           <div>Departure day</div>
-          <div>Duration</div>
+          <div class="duration">Duration</div>
           <div>Arrival day</div>
           <div>Price</div>
           <span>5:00 AM</span>
-          <p>
-            ⚫ ••••••••••
+          <div class="duration">
+            <p>
+              ⚫ •••••••••
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.9285714285714286"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-plane-takeoff"
-            >
-              <path d="M2 22h20" />
-              <path
-                d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9285714285714286"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-plane-takeoff"
+              >
+                <path d="M2 22h20" />
+                <path
+                  d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"
+                />
+              </svg>
 
-            •••••••••• ◯
-          </p>
+              ••••••••• ◯
+            </p>
+          </div>
           <span>6:00 PM</span>
           <span>$1200.00</span>
           <p>BEY</p>
-          <p>2 Days</p>
+          <p class="duration">2 Days</p>
           <p>LAX</p>
           <button class="btn-info">More info</button>
           <button class="btn-book">Book this flight</button>
         </div>
       </section>
+      <section class="flights hide">
+        <div class="select-city">
+          <p>View all flights departing or arriving to</p>
+          <select>
+            <option value="Beirut">Beirut</option>
+            <option value="Los Angeles">Los Angeles</option>
+          </select>
+        </div>
+        <ul class="flights-list">
+          <li class="list-titles">
+            <p>Flight number</p>
+            <p>Status</p>
+            <p>Departure city - Arrival city</p>
+            <p>Departure time - Arrival time</p>
+          </li>
+          <li>
+            <p>Flight number</p>
+            <p>Flight number</p>
+            <p>Flight number</p>
+            <p>Flight number</p>
+          </li>
+          <li>
+            <p>Flight number</p>
+            <p>Flight number</p>
+            <p>Flight number</p>
+            <p>Flight number</p>
+          </li>
+        </ul>
+      </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
     <script src="scripts/index.js"></script>
   </body>
 </html>

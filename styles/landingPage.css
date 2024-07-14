@@ -12,15 +12,45 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 header {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-image: url(/assets/images/plane.jpg);
   background-size: cover;
   height: 100vh;
   width: 100%;
+}
+button,
+a,
+select {
+  cursor: pointer;
+}
+
+button:hover,
+a:hover {
+  scale: 1.05 !important;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 1rem;
+  border: 1px solid #000;
+}
+
+li p {
+  width: 15rem;
+  text-align: center;
 }
 
 .navbar {
@@ -57,39 +87,63 @@ header {
   border-radius: 6px;
 }
 
+.btn-open-menu {
+  position: absolute;
+  display: none;
+  right: 2rem;
+}
+
+.menu {
+  position: absolute;
+  display: none;
+}
+
+.btn-close-menu {
+  display: none;
+  position: absolute;
+}
+
 .ticket-flight-filter {
   align-self: center;
-  margin-top: 22rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
   background-color: #ffffff99;
   backdrop-filter: blur(20px);
-  width: 80%;
-  height: 15rem;
+  width: 90%;
   border-radius: 15px;
   box-shadow: 0px 10px 40px -10px var(--secondary-color);
 }
 
-.links-group {
+.btn-group {
   display: flex;
+  gap: 3rem;
+  padding: 0.5rem;
+}
+
+.btn-group button {
   font-size: 1.3rem;
   font-weight: 700;
-  gap: 3rem;
-  padding: 2rem;
+  background: none;
+  border: none;
 }
 
-.links-group a {
-  color: #000;
-  text-decoration: none;
-}
-
-.active-link {
-  color: #000;
+button.active {
   border-bottom: 3px solid var(--primary-color);
+}
+
+.filters.hide,
+.tickets.hide,
+.search.hide,
+.flights.hide {
+  display: none;
 }
 
 .filters {
   height: 8rem;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
   justify-content: space-evenly;
 }
 
@@ -108,11 +162,10 @@ header {
 .ticket-filter {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 2rem;
+  gap: 0.7rem;
+  padding: 1.5rem;
   border: 1px solid #000;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 .ticket-filter select {
@@ -150,7 +203,6 @@ header {
   text-decoration: none;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 #date-input {
@@ -165,17 +217,18 @@ header {
   align-items: center;
   gap: 2rem;
   padding: 2rem;
+  margin-top: 1rem;
 }
 
 .ticket {
   padding: 20px;
   border-radius: 15px;
-  width: 70%;
+  width: 80%;
   display: grid;
   gap: 1rem;
   align-items: center;
   justify-items: center;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   box-shadow: 0px 10px 40px -10px var(--secondary-color);
 }
@@ -200,7 +253,6 @@ header {
   grid-row: -2 / -1;
   width: fit-content;
   border-radius: 6px;
-  cursor: pointer;
   padding: 10px;
 }
 
@@ -212,4 +264,73 @@ header {
   background-color: var(--primary-color);
   color: #fff;
   border: none;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.search span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.direction {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.search-flight input {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 15rem;
+}
+
+.search-flight button {
+  padding: 10px;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+}
+
+.flights {
+  padding: 2rem;
+  align-self: center;
+  width: 95%;
+}
+
+.flights-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-titles {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.select-city {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.select-city select {
+  padding: 0.4rem;
+  border: none;
+  color: #fff;
+  background-color: var(--primary-color);
+  border-radius: 6px;
 }
