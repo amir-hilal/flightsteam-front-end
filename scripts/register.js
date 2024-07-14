@@ -30,6 +30,7 @@ form.addEventListener('submit', (e) => {
     const isLastName = checkName(last_name);
     const isEmail = checkEmail(email.value);
     const isPassword = checkPassword(password.value);
+    const isValid= isName && isMiddleName && isLastName &&isEmail &&isPassword;
 
     if (!isName) {
         document.getElementById('first_name_message').innerText = 'Required';
@@ -74,5 +75,15 @@ form.addEventListener('submit', (e) => {
         password.style.borderColor = '';
     }
     
+    if(isValid){
+        const formData = {
+            firstName: document.getElementById('fName').value,
+            lastName: document.getElementById('lName').value,
+            email: document.getElementById('email').value
+        };
+        
+        localStorage.setItem('formData', JSON.stringify(formData));
+        window.location.href='verification.html';
+    }
 })
 
