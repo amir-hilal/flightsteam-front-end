@@ -7,41 +7,57 @@
     <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-    <body>
-        <div class="container">
-            <nav>
-                <h2>FLIGHTSTEAM</h2>
-              <div class="navbar-links-register">
+    <div class="container">
+        <nav>
+            <h2>FLIGHTSTEAM</h2>
+            <div class="navbar-links-register">
                 <a href="index.html" class="active-link">Home</a>
                 <a href="chatbot.html">Flightsteam AI</a>
                 <a href="login.html">Log in</a>
                 <a href="signup.html">Sign up</a>
-              </div>
-            </nav>
-          <div class="form">
+            </div>
+        </nav>
+        <div class="form">
             <img src="assets/images/image2.jpg" alt="Nature image" class="img-register" />
             <div class="register">
-                <form action="/sign-up" method="post">
+                <form id="registrationForm" action="/sign-up" method="post">
                     <div class="spacing">
                         <p>Welcome To Flighsteam!</p>
                         <p class="header">Create your Account</p>
+                        <div class="form-control">
                         <label>First Name</label>
-                        <input type="text" required>
+                        <input type="text" id="fName">
+                        <span id="first_name_message" class="error-message"></span>
+                        </div>
+                        <div class="form-control">
                         <label>Middle Name</label>
-                        <input type="text" required>
+                        <input type="text" id="mName">
+                        <span id="middle_name_message" class="error-message"></span>
+                        </div>
+                        <div class="form-control">
                         <label>Last Name</label>
-                        <input type="text" required>
+                        <input type="text" id="lName">
+                        <span id="last_name_message" class="error-message"></span>
+                        </div>
+                        <div class="form-control">
+                          
                         <label>E-mail</label>
-                        <input type="email" required placeholder="example@gmail.com">
+                        <input id="email" placeholder="example@gmail.com">
+                        <span id="email_message" class="error-message"></span>
+                        </div>
+                        <div class="form-control">
+                          
                         <label>Password</label>
-                        <input type="password" required placeholder="********">
+                        <input type="password" id="password" placeholder="********">
+                        <span id="password_message" class="error-message"></span>
+                        </div>
                         <button type="submit" class="sign-up-btn">Sign up</button>
                         <p>Already have an Account? <a href="login.html">Log in</a></p>
                     </div>
                 </form>
             </div>
-          </div>
         </div>
-      </body>
+    </div>
+    <script src="scripts/register.js"></script>
 </body>
 </html>
