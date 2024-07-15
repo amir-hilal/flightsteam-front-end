@@ -33,7 +33,7 @@ document.getElementById('otpForm').addEventListener('submit', async function (e)
     }
 
     // Get the email from session storage or any other source
-    const email = sessionStorage.getItem('email') || 'user@example.com'; // Replace with actual method to get the email
+    const email = localStorage.getItem('email');
 
     // Prepare data to send
     const data = {

@@ -8,17 +8,61 @@
   </head>
   <body>
     <div class="container">
-        <nav>
-            <h2>FLIGHTSTEAM</h2>
-          <div class="navbar-links">
-            <a href="index.html" class="active-link">Home</a>
-            <a href="chatbot.html">Flightsteam AI</a>
-            <a href="login.html">Log in</a>
-            <a href="register.html">Sign up</a>
-          </div>
-        </nav>
+      <header>
+      <nav class="navbar">
+        <h2>FLIGHTSTEAM</h2>
+        <div class="navbar-links">
+          <a href="index.html" class="active-link">Home</a>
+          <a href="chatbot.html">Flightsteam AI</a>
+          <a href="login.html">Log in</a>
+          <a href="register.html">Sign up</a>
+        </div>
+
+        <button class="btn-open-menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7142857142857142"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-align-justify"
+          >
+            <line x1="3" x2="21" y1="6" y2="6" />
+            <line x1="3" x2="21" y1="12" y2="12" />
+            <line x1="3" x2="21" y1="18" y2="18" />
+          </svg>
+        </button>
+        <button class="btn-close-menu closed">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <div class="menu closed">
+          <a href="index.html">Home</a>
+          <a href="chatbot.html">Flightsteam AI</a>
+          <a href="login.html">Log in</a>
+          <a href="register.html">Sign up</a>
+        </div>
+      </nav>
+    </header>
       <div class="form">
-        <img src="assets/images/image.jpg" alt="Nature image" class="img" />
+        <img src="assets/images/image.jpg"  class="img" >
         <div class="login">
             <form action="/login" method="post" id="loginForm">
                 <div class="spacing">

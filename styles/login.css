@@ -6,49 +6,77 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: Times New Roman', Times, serif;'
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
 
 .container {
     background-image:url('../assets/images/plane.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;
-    align-items: center;
     height: 100vh;
+    align-items: center;
     overflow-x: hidden;
   }
 
-  
-  nav {
+
+  header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
+    background-image: url(assets/images/plane.jpg);
+    background-size: cover;
+    height: 100vh;
     width: 100%;
-    min-height: 70px;
-    color: white;
+  }
+  button,
+  a,
+  select {
+    cursor: pointer;
+  }
+  
+  button:hover,
+  a:hover {
+    scale: 1.05 !important;
+  }
+  
+  li {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 1rem;
+    border: 1px solid #000;
+  }
+  
+  li p {
+    width: 15rem;
     text-align: center;
   }
-  /* .navbar {
+  
+  .navbar {
     padding: 2rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }*/
- 
-   h2 {
+  }
+  
+  .navbar h2 {
     color: var(--secondary-color);
-    margin-left: 50px;
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: 0.3rem;
-  } 
+  }
   
   .navbar-links {
     display: flex;
     align-items: center;
     gap: 5rem;
-    margin-right: 50px;
   }
   
   .navbar-links a {
@@ -57,27 +85,7 @@
     text-decoration: none;
   }
   
-  .navbar-links :nth-last-child(2) {
-    color: white;
-    background-color: var(--primary-color);
-    padding: 7px;
-    border: none;
-    border-radius: 6px;
-  }
-  .navbar-links-register {
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-    margin-right: 50px;
-  }
-  
-  .navbar-links-register a {
-    color: #000;
-    font-size: 1.5rem;
-    text-decoration: none;
-  }
-  
-  .navbar-links-register :last-child {
+  .navbar-links :last-child {
     color: white;
     background-color: var(--primary-color);
     padding: 7px;
@@ -85,6 +93,22 @@
     border-radius: 6px;
   }
   
+  .btn-open-menu {
+    position: absolute;
+    display: none;
+    right: 2rem;
+  }
+  
+  .menu {
+    position: absolute;
+    display: none;
+  }
+  
+  .btn-close-menu {
+    display: none;
+    position: absolute;
+  }
+    
   
   .form {
     display: flex;
@@ -99,15 +123,10 @@
   
   .img {
     width: 100%;
-    height: 550px;
+    height: 500px;
     object-fit: cover;
   }
   
-  .img-register {
-    width: 100%;
-    height: 670px;
-    object-fit: cover;
-  }
   
   .login {
     padding: 2rem;
@@ -116,15 +135,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .register {
-    padding: 2rem;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* height: 80vh; */
   }
   
   
@@ -150,7 +160,7 @@
     margin-bottom: 24px;
 }
 
-.login-btn , .sign-up-btn{
+.login-btn {
     height: 35px;
     width: 270px;
     font-weight: bold;
@@ -204,7 +214,7 @@ input{
       flex-direction: row;
     }
   
-    .img , .img-register {
+    .img  {
       width: 50%;
     }
   
@@ -212,3 +222,185 @@ input{
       width: 50%;
     }
   }
+  @media screen and (max-width: 1205px) {
+    .ticket-flight-filter {
+      height: 19rem;
+    }
+    .btn-search {
+      margin-top: 1rem;
+      flex-direction: row;
+      width: 10rem;
+      justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 990px) {
+    .ticket {
+      grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr;
+    }
+  
+    .navbar-links {
+      display: none;
+    }
+  
+    .btn-open-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 6rem 3rem;
+      align-items: center;
+      z-index: 2;
+      right: -10px;
+      top: 0px;
+      height: 100vh;
+      width: 20rem;
+      background-color: var(--primary-color);
+      transition: all 0.5s;
+    }
+  
+    .menu a {
+      color: #fff;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+  
+    .btn-close-menu {
+      display: block;
+      z-index: 3;
+      color: #fff;
+      background: none;
+      border: none;
+      right: 2rem;
+      top: 10px;
+      position: absolute;
+      transition: all 0.5s;
+    }
+  
+    .menu :last-child {
+      color: var(--primary-color);
+      background-color: #fff;
+      padding: 7px;
+      border: none;
+      border-radius: 6px;
+    }
+  
+    .closed {
+      right: -20rem;
+      transition: all 0.5s;
+    }
+  }
+  
+  @media screen and (max-width: 880px) {
+    .ticket-filter {
+      font-size: 0.8rem;
+      padding: 1rem;
+    }
+  
+    .ticket-flight-filter {
+      height: 17rem;
+    }
+  
+    .ticket {
+      width: 95%;
+      font-size: 1rem;
+      grid-template-columns: 0.3fr 1fr 1fr 1fr;
+    }
+  
+    .ticket span {
+      font-size: 1rem;
+    }
+  
+    .btn-search {
+      padding: 1rem;
+    }
+  
+    .duration,
+    .direction {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 765px) {
+    .img{
+      display: none;
+    }
+    .ticket-flight-filter {
+      height: 21rem;
+    }
+  
+    .search {
+      font-size: 0.8rem;
+    }
+    .search span {
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media screen and (max-width: 510px) {
+    
+    .ticket-flight-filter {
+      height: 19rem;
+    }
+  
+    .ticket-filter {
+      font-size: 0.6rem;
+      padding: 0.6rem;
+    }
+  
+    .ticket {
+      width: 100%;
+      font-size: 0.7rem;
+      grid-template-columns: 0.1fr 1fr 1fr 1fr;
+    }
+  
+    .company p {
+      font-size: 1rem;
+    }
+  
+    .filters :first-child .filter-icon {
+      color: var(--primary-color);
+      background: none;
+    }
+  
+    .filter-icon {
+      padding: 0;
+      color: var(--secondary-color);
+      background: none;
+    }
+  
+    .btn-search {
+      padding: 0.8rem;
+      width: 6rem;
+    }
+    .btn-search p {
+      display: none;
+    }
+  
+    button {
+      font-size: 9px;
+    }
+  
+    .search {
+      font-size: 0.6rem;
+    }
+    .search span {
+      font-size: 0.6rem;
+    }
+  
+    .search input {
+      width: 8rem;
+    }
+  }
+  
