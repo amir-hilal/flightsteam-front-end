@@ -20,14 +20,14 @@
       <div class="form">
         <img src="assets/images/image.jpg" alt="Nature image" class="img" />
         <div class="login">
-            <form action="/login" method="post">
+            <form action="/login" method="post" id="loginForm">
                 <div class="spacing">
                     <p>Welcome Back!</p>
                     <p class="header">Log in to your Account</p>
                     <label>E-mail</label>
-                    <input type="email" required placeholder="example@gmail.com">
+                    <input type="email" required placeholder="example@gmail.com" id="email">
                     <label>Password</label>
-                    <input type="password" required placeholder="********">
+                    <input type="password" required placeholder="********" id="password">
                     <a href="#">Forgot Password?</a>
                     <button type="submit" class="login-btn">Log in</button>
                     <p>Don't have an account? <a href="register.html">Sign up</a></p>
@@ -36,5 +36,6 @@
         </div>
       </div>
     </div>
+    <script src="scripts/login.js"></script>
   </body>
 </html>

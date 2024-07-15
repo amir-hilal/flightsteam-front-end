@@ -1,89 +1,66 @@
-const form = document.getElementById('registrationForm');
-const first_name = document.getElementById('fName');
-const middle_name = document.getElementById('mName');
-const last_name = document.getElementById('lName');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-
-
-const checkName = (name) => {
-    if (name.value === "") {
-        return false;
-    }
-    return true;
-}
-
-const checkEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-}
-
-const checkPassword = (password) => {
-    return password.length >= 6;
-}
-
-
-form.addEventListener('submit', (e) => {
+document.getElementById('registrationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const isName = checkName(first_name);
-    const isMiddleName = checkName(middle_name);
-    const isLastName = checkName(last_name);
-    const isEmail = checkEmail(email.value);
-    const isPassword = checkPassword(password.value);
-    const isValid= isName && isMiddleName && isLastName &&isEmail &&isPassword;
 
-    if (!isName) {
-        document.getElementById('first_name_message').innerText = 'Required';
-        first_name.style.borderColor ='red';
-    }
-    else {
-        document.getElementById('first_name_message').innerText = '';
-        first_name.style.borderColor ='';
-    }
-    if (!isMiddleName) {
+    // Clear previous error messages
+    document.querySelectorAll('.error-message').forEach(function (element) {
+        element.textContent = '';
+    });
 
-        document.getElementById('middle_name_message').innerText = 'Required';
-        middle_name.style.borderColor ='red';
+    // Get form data
+    const firstName = document.getElementById('fName').value;
+    const middleName = document.getElementById('mName').value;
+    const lastName = document.getElementById('lName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const phoneNumber = document.getElementById('phone').value; // Add a phone input field in the form if it's required
+
+    // Basic client-side validation
+    if (!firstName) {
+        document.getElementById('first_name_message').textContent = 'First name is required';
+        return;
     }
-    else {
-        document.getElementById('middle_name_message').innerText = '';
-        middle_name.style.borderColor ='';
+    if (!lastName) {
+        document.getElementById('last_name_message').textContent = 'Last name is required';
+        return;
     }
-    if (!isLastName) {
-        document.getElementById('last_name_message').innerText = 'Required';
-        last_name.style.borderColor= 'red';
+    if (!email) {
+        document.getElementById('email_message').textContent = 'Email is required';
+        return;
     }
-    else {
-        document.getElementById('last_name_message').innerText = '';
-        last_name.style.borderColor ='';
+    if (!password) {
+        document.getElementById('password_message').textContent = 'Password is required';
+        return;
     }
 
-    if (!isEmail) {
-        document.getElementById('email_message').innerText = 'Invalid Email';
-        email.style.borderColor ='red';
-    }
-    else {
-        document.getElementById('email_message').innerText = '';
-        email.style.borderColor ='';
-    }
-    if (!isPassword) {
-        document.getElementById('password_message').innerText = 'Password needs to be at least 6 characters';
-        password.style.borderColor = 'red';
-    }
-    else {
-        document.getElementById('password_message').innerText = '';
-        password.style.borderColor = '';
-    }
-    
-    if(isValid){
-        const formData = {
-            firstName: document.getElementById('fName').value,
-            lastName: document.getElementById('lName').value,
-            email: document.getElementById('email').value
-        };
-        
-        localStorage.setItem('formData', JSON.stringify(formData));
-        window.location.href='verification.html';
-    }
-})
+    // Prepare data to send
+    const data = {
+        first_name: firstName,
+        middle_name: middleName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        phone_number: phoneNumber
+    };
 
+    try {
+        console.log(data)
+        const response = await fetch('http://localhost/flightsteam-back-end/api/users/register.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        console.log(response.body)
+        const result = await response.json();
+
+        if (response.ok && result.status === 200) {
+            alert('Data submitted successfully');
+            window.location.href = 'verification.html'
+        } else {
+            alert(result.message + " edit");
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
+    }
+});
