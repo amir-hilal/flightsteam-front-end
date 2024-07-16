@@ -53,6 +53,12 @@ li p {
   text-align: center;
 }
 
+li :last-child {
+  display: flex;
+  width: 20rem;
+  gap: 1rem;
+}
+
 .navbar {
   padding: 2rem 3rem;
   display: flex;
