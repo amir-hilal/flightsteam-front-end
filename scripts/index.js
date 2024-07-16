@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navbarLinks = document.querySelector(".navbar-links");
   const btnSearch = document.getElementById('btn-search');
   const flightsSection = document.getElementById('tickets-section');
-
+  const flightsContainer = document.getElementById('flights-container');
+  const flightsList = document.getElementById('flights-list');
   let flightsData = [];
 
   // Check for authentication token
@@ -94,49 +95,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const arrivalCity = document.getElementById('arrival-city-input').value.trim();
     const passengers = document.getElementById('select-passengers').value.trim();
     btnSearch.disabled = !(departureCity || arrivalCity || passengers);
-    btnSearch.disabled? fetchFlights(): console.log("no data")
+    btnSearch.disabled ? fetchFlights() : console.log("no data");
   }
 
   document.getElementById('departure-city-input').addEventListener('input', checkSearchButton);
   document.getElementById('arrival-city-input').addEventListener('input', checkSearchButton);
   document.getElementById('select-passengers').addEventListener('input', checkSearchButton);
 
-  function storeFlightsInLocalStorage(flights) {
-    localStorage.setItem('flights', JSON.stringify(flights));
-  }
-
-  function getFlightsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('flights')) || [];
-  }
-
   function fetchFlights() {
-    const storedFlights = getFlightsFromLocalStorage();
-    if (storedFlights.length > 0) {
-      flightsData = storedFlights;
-      renderFlights(flightsData);
-    } else {
-      fetch('http://localhost/flightsteam-back-end/api/flights/getAll.php')
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 200) {
-            flightsData = data.data.flights;
-            storeFlightsInLocalStorage(flightsData);
-            renderFlights(flightsData);
-          } else {
-            const flightsContainer = document.getElementById('flights-container');
-            flightsContainer.innerHTML = '<p>No flights found.</p>';
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching flights:', error);
-          const flightsContainer = document.getElementById('flights-container');
-          flightsContainer.innerHTML = '<p>Error loading flights. Please try again later.</p>';
-        });
-    }
+    fetch('http://localhost/flightsteam-back-end/api/flights/getAll.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 200) {
+          flightsData = data.data.flights;
+          renderFlights(flightsData);
+          renderFlightsList(flightsData);
+          console.log('populating');
+        } else {
+          flightsContainer.innerHTML = '<p>No flights found.</p>';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching flights:', error);
+        flightsContainer.innerHTML = '<p>Error loading flights. Please try again later.</p>';
+      });
+    populateCityDatalists(flightsData); // Populate datalists with cities
+  }
+
+  function populateCityDatalists(flights) {
+    const departureCities = new Set();
+    const arrivalCities = new Set();
+
+    flights.forEach(flight => {
+      departureCities.add(flight.departure_city);
+      arrivalCities.add(flight.arrival_city);
+    });
+
+    const departureDatalist = document.getElementById('departure-cities');
+    const arrivalDatalist = document.getElementById('arrival-cities');
+
+    departureDatalist.innerHTML = '';
+    arrivalDatalist.innerHTML = '';
+
+    departureCities.forEach(city => {
+      const option = document.createElement('option');
+      option.value = city;
+      departureDatalist.appendChild(option);
+    });
+
+    arrivalCities.forEach(city => {
+      const option = document.createElement('option');
+      option.value = city;
+      arrivalDatalist.appendChild(option);
+    });
+
+    console.log(arrivalDatalist, departureDatalist);
   }
 
   function renderFlights(flights) {
-    const flightsContainer = document.getElementById('flights-container');
     flightsContainer.innerHTML = '';
 
     flights.forEach(flight => {
@@ -179,8 +195,51 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="btn-book">Book this flight</button>
       `;
       flightsContainer.appendChild(flightElement);
+
+      // Add event listener to the "Book this flight" button
+      flightElement.querySelector('.btn-book').addEventListener('click', () => {
+        const token = getCookie("token");
+        if (token) {
+          // User is logged in, redirect to bookflight page
+          window.location.href = `bookflight.html?flight_id=${flight.flight_id}`;
+        } else {
+          // User is not logged in, redirect to login page
+          window.location.href = 'login.html';
+        }
+      });
     });
   }
+  function renderFlightsList(flights) {
+    flightsList.innerHTML = `
+      <li class="list-titles">
+        <p>Flight number</p>
+        <p>Status</p>
+        <p>Departure city - Arrival city</p>
+        <p>Departure time - Arrival time</p>
+      </li>
+    `;
+
+    flights.forEach(flight => {
+      const flightElement = document.createElement('li');
+      flightElement.innerHTML = `
+        <p>${flight.flight_number}</p>
+        <p>${flight.status || 'Scheduled'}</p>
+        <p>${flight.departure_city} - ${flight.arrival_city}</p>
+        <p>${new Date(flight.departure_time).toLocaleString()} - ${new Date(flight.arrival_time).toLocaleString()}</p>
+      `;
+      flightsList.appendChild(flightElement);
+      console.log(flightElement)
+    });
+  }
+
+  function filterFlightsByNumber() {
+    const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
+    const filteredFlights = flightsData.filter(flight => flight.flight_number.toLowerCase().includes(searchInput));
+    renderFlightsList(filteredFlights);
+  }
+
+  document.querySelector('.btn-search-flight').addEventListener('click', filterFlightsByNumber);
+  document.getElementById('search-input').addEventListener('input', filterFlightsByNumber);
 
   function filterFlights() {
     const departureCity = document.getElementById('departure-city-input').value.trim().toLowerCase();
@@ -202,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderFlights(filteredFlights);
-}
+  }
 
   btnSearch.addEventListener('click', () => {
     filterFlights();

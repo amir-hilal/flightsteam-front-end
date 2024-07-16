@@ -291,9 +291,11 @@ button.active {
 }
 
 .search {
+  height: 70%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   gap: 1rem;
   transition: all 0.5s;
 }
@@ -315,12 +317,13 @@ button.active {
   gap: 0.5rem;
 }
 
-.search-flight input {
+
+.search input {
   padding: 0.5rem;
   width: 15rem;
 }
 
-.search-flight button {
+.search button {
   padding: 10px;
   border: none;
   color: #fff;
@@ -336,7 +339,6 @@ button.active {
 }
 
 .flights-list {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -373,18 +375,17 @@ button.active {
 }
 
 .ticket-filter datalist {
-  display: block;
+  display: none !important;
   border: 1px solid #ccc;
   border-radius: 4px;
   max-height: 150px;
   overflow-y: hidden;
 }
 
+
+
 .ticket-filter option {
   padding: 0.5rem;
   cursor: pointer;
 }
 
-datalist{
-  display: none !important;
-}
