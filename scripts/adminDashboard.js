@@ -1,49 +1,16 @@
-document.addEventListener('DOMContentLoaded', async function () {
-    const ctx = document.getElementById('roomsChart').getContext('2d');
-    
-    const roomsChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [],
-            datasets: [{
-                label: 'Available Rooms',
-                data: [],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // Axios GET request to fetch stats from PHP
+    axios.get('http://localhost/flightsteam-back-end/api/admins/getData.php')
+        .then(function(response) {
+            const stats = response.data;
+            console.log(stats);
 
-    try {
-        const response = await axios.get('http://localhost/flightsteam-back-end/api/hotels/getAll.php');
-        console.log('API Response:', response.data);
-
-        if (response.data && response.data.hotels) {
-            // Process response data
-            const labels = [];
-            const data = [];
-            response.data.hotels.forEach(hotel => {
-                labels.push(hotel.name); 
-                data.push(hotel.available_rooms); 
-            });
-            roomsChart.data.labels = labels;
-            roomsChart.data.datasets[0].data = data;
-            roomsChart.update();
-        } else {
-            console.error('Unexpected API response structure:', response.data);
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-});
+            // Update DOM elements with fetched data
+            document.getElementById('totalBookingsCard').querySelector('.card-text').innerText = stats.totalBookings;
+            document.getElementById('pendingBookingsCard').querySelector('.card-text').innerText = stats.pendingBookings;
+            document.getElementById('totalUsersCard').querySelector('.card-text').innerText = stats.totalUsers;
+        })
+        .catch(function(error) {
+            console.error('Error fetching stats:', error);
+        });
+})

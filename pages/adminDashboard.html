@@ -10,21 +10,18 @@
 <body>
     <div class="wrapper">
 
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <h1 class="sidebar-heading">Navigation Bar</h1>
             <div class="sidebar-menu">
-                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="#" >Dashboard</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="#" >Users</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-credit-card" ></i><a href="#" >Payments</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-plane" ></i><a href="#" >Flights</a></h3>
-                <h3 class="sidebar-item"><i class="fas fa-user-shield" ></i><a href="#">Admin Profile</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="adminDashboard.html">Dashboard</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="adminUsersList.html">Users</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="adminFlight.html">Flights</a></h3>
             </div>
         </div>
 
         <div class="content">
             <nav class="navbar">
                 <div class="search-box">
-                    
                     <input type="text" class="search-input" placeholder="Search"><i class="fa fa-search "></i>
                 </div>
                 <div class="nav-icons">
@@ -37,25 +34,25 @@
             <div class="container">
                 <h1 class="dashboard-title">Dashboard</h1>
                 <div class="cards">
-                    <div class="card">
+                    <div class="card" id="totalBookingsCard">
                         <i class="fa fa-plane card-icon"></i>
                         <h5 class="card-title">Total Bookings</h5>
-                        <p class="card-text">999</p>
+                        <p class="card-text">Loading...</p>
                     </div>
-                    <div class="card">
+                    <div class="card" id="pendingBookingsCard">
                         <i class="fa fa-clock card-icon"></i>
                         <h5 class="card-title">Pending Bookings</h5>
-                        <p class="card-text">999</p>
+                        <p class="card-text">Loading...</p>
                     </div>
-                    <div class="card">
+                    <div class="card" id="totalRevenueCard">
                         <i class="fa fa-dollar-sign card-icon"></i>
                         <h5 class="card-title">Total Revenue</h5>
-                        <p class="card-text">999</p>
+                        <p class="card-text">Loading...</p>
                     </div>
-                    <div class="card">
+                    <div class="card" id="totalUsersCard">
                         <i class="fa fa-users card-icon"></i>
                         <h5 class="card-title">Total Users</h5>
-                        <p class="card-text">999</p>
+                        <p class="card-text">Loading...</p>
                     </div>
                 </div>
                 <div class="hotels-card">

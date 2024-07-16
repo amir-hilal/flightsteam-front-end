@@ -6,26 +6,23 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../styles/adminUserList.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
-
         <div class="sidebar" id="sidebar">
             <h1 class="sidebar-heading">Navigation Bar</h1>
             <div class="sidebar-menu">
-                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="#">Dashboard</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="#">Users</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-credit-card"></i><a href="#">Payments</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="#">Flights</a></h3>
-                <h3 class="sidebar-item"><i class="fas fa-user-shield"></i><a href="#">Admin Profile</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="adminDashboard.html">Dashboard</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="adminUsersList.html">Users</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="adminFlight.html">Flights</a></h3>
             </div>
         </div>
-
         <div class="content">
             <nav class="navbar">
                 <button class="toggle-button" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
                 <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search"><i class="fa fa-search"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search"><i class="fa fa-search"></i>
                 </div>
                 <div class="nav-icons">
                     <img src="../assets/lbFlag.png" alt="Flag" class="flag-icon">
@@ -37,9 +34,6 @@
             <div class="main-content">
                 <div class="flights-header">
                     <h1>Users</h1>
-                    <div class="flights-actions">
-                        <button class="filter-button"><i class="fas fa-sliders-h"></i></button>
-                    </div>
                 </div>
                 <table class="flights-table">
                     <thead>
@@ -55,34 +49,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example rows -->
-                        <tr>
-                            <td>1</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>john@example.com</td>
-                            <td>######</td>
-                            <td>+961 000000</td>
-                            <td><button class="del-button">DEL</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>john@example.com</td>
-                            <td>######</td>
-                            <td>+961 000000</td>
-                            <td><button class="del-button">DEL</button></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
-
     <script src="../scripts/adminUsersList.js"></script>
 </body>
 </html>
