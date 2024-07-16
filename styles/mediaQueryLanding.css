@@ -5,7 +5,8 @@
   .btn-search {
     margin-top: 1rem;
     flex-direction: row;
-    width: 10rem;
+    width: 8rem;
+    height: 3rem;
     justify-content: center;
   }
 }
@@ -85,7 +86,7 @@
   }
 
   .ticket-flight-filter {
-    height: 17rem;
+    height: 20rem;
   }
 
   .ticket {

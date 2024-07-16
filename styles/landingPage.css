@@ -168,6 +168,7 @@ button.active {
 
 .ticket-filter {
   display: flex;
+  height: 100px;
   align-items: center;
   gap: 0.7rem;
   padding: 1.5rem;
@@ -200,45 +201,60 @@ button.active {
 }
 
 .btn-search {
+  margin-top: 0 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   background-color: var(--primary-color);
   color: #fff;
-  padding: 1.2rem 1rem;
+  height: 100px;
+  padding: .9rem .4rem;
   text-decoration: none;
   border: none;
   border-radius: 6px;
 }
 
+.btn-search:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+
+
+
 #date-input {
   border: none;
+  width: 130px;
   background: none;
   font-size: 0.9rem;
+}
+
+#select-passengers{
+  width: 130px;
 }
 
 .tickets {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
   padding: 2rem;
-  margin-top: 1rem;
   transition: all 0.5s;
 }
+
 
 .ticket {
   padding: 20px;
   border-radius: 15px;
-  width: 80%;
   display: grid;
+  margin: 0 0 2rem 0;
   gap: 1rem;
   align-items: center;
   justify-items: center;
   grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  box-shadow: 0px 10px 40px -10px var(--secondary-color);
+  box-shadow: 0px 0px 30px -7px var(--secondary-color);
 }
 
 .ticket span {
@@ -275,7 +291,6 @@ button.active {
 }
 
 .search {
-  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -301,7 +316,6 @@ button.active {
 }
 
 .search-flight input {
-  margin-top: 1rem;
   padding: 0.5rem;
   width: 15rem;
 }
@@ -344,4 +358,33 @@ button.active {
   color: #fff;
   background-color: var(--primary-color);
   border-radius: 6px;
+}
+
+.ticket-filter input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.ticket-filter input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.ticket-filter datalist {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: hidden;
+}
+
+.ticket-filter option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+datalist{
+  display: none !important;
 }

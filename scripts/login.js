@@ -23,10 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const result = await response.json();
 
         if (response.ok && result.status === 200) {
-            alert('Login successful');
-            // Save the token or user data in sessionStorage or localStorage
-            sessionStorage.setItem('token', result.token);
-            // Redirect to the dashboard or home page
+            document.cookie = `token=${result.data.token}; Max-Age=${60 * 60}; path=/`;
             window.location.href = 'index.html';
         } else {
             alert(result.message);
