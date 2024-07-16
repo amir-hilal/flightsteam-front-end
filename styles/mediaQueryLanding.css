@@ -38,12 +38,12 @@
     padding: 6rem 3rem;
     align-items: center;
     z-index: 2;
-    right: -10rem;
+    right: 0rem;
     top: 0px;
     height: 100vh;
     width: 20rem;
     background-color: var(--primary-color);
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
 
   .menu a {
@@ -61,7 +61,7 @@
     right: 2rem;
     top: 10px;
     position: absolute;
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
 
   .menu :last-child {
@@ -73,8 +73,8 @@
   }
 
   .closed {
-    right: -20rem;
-    transition: all 0.5s;
+    right: -30rem;
+    transition: all 0.3s;
   }
 }
 

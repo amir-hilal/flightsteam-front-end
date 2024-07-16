@@ -90,9 +90,9 @@ searchBtn.addEventListener("click", () => {
   const passengers = document.getElementById("select-passengers").value;
 
   const filteredFlights = flights.filter(
-    (flight) =>
-      flight.departure_city === departureCity &&
-      flight.arrival_city === destination
+    (flight) => flight
+    // flight.departure_city === departureCity &&
+    // flight.arrival_city === destination
   );
 
   if (filteredFlights.length == 0) return;
@@ -169,4 +169,9 @@ searchBtn.addEventListener("click", () => {
       </div>
     `;
   });
+});
+
+window.addEventListener("scroll", () => {
+  console.log(window.scrollY);
+  document.querySelector("spline-viewer").style.zIndex = "-5";
 });
