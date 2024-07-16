@@ -35,7 +35,11 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
         document.getElementById('password_message').textContent = 'Password is required';
         return
     }
-
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    if (!password.match(passwordRegex)) {
+        showModal('Password must contain at least 8 characters,\none number, and one special character');
+        return
+    }
     document.getElementById('loadingOverlay').classList.remove('hidden');
     disableInteractions();
 
@@ -67,10 +71,10 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
             localStorage.setItem('email', data['email']);
             window.location.href = 'verification.html'
         } else {
-            alert(result.message );
+        showModal('An error occurred: ' + error.message);
         }
     } catch (error) {
-        alert('An error occurred: ' + error.message);
+        showModal('An error occurred: ' + error.message);
     } finally{
         
         document.getElementById('loadingOverlay').classList.add('hidden');
@@ -94,3 +98,15 @@ function enableInteractions() {
         element.style.pointerEvents = 'auto';
     });
 }
+
+
+function showModal(message) {
+    const modal = document.getElementById('myModal');
+    const modalMessage = modal.querySelector('p');
+    modalMessage.textContent = message;
+    modal.style.display = 'flex';
+}
+
+document.getElementById('modalOkButton').addEventListener('click', function () {
+    document.getElementById('myModal').style.display = 'none';
+});
