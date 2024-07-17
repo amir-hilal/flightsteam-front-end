@@ -1,0 +1,76 @@
+:root {
+  --primary-color: #d25134;
+  --secondary-color: #36454f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+input,
+select {
+  padding: 0.3rem;
+  border-radius: 6px;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+#form-container {
+  height: 25rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#trip-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+#trip-form button {
+  grid-row: 4 / 5;
+  grid-column: 1 / -1;
+  margin: 0 7rem;
+}
+
+.ai-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.ai-text-field {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.ai-text-field input {
+  width: 20rem;
+}
+
+#chat-container p {
+  margin-bottom: 1rem;
+}
