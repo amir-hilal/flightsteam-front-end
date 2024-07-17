@@ -1,162 +1,141 @@
-const chatInput = document.getElementById("chat-input");
-const sendButton = document.getElementById("send-btn");
-const chatContainer = document.getElementById("chat-container");
-const tripForm = document.getElementById("trip-form");
+document.addEventListener('DOMContentLoaded', async function () {
+  const token = getCookie('token');
+  if (!token) {
+      window.location.href = '/index.html';
+      return;
+  }
 
-let inputContent = "";
-let chat = [];
-const userId = 12;
+  const departureSelect = document.getElementById('departureLocation');
+  const arrivalSelect = document.getElementById('arrivalLocation');
+  const travelForm = document.getElementById('travelForm');
+  const chatContainer = document.getElementById('chatContainer');
 
-chatInput.addEventListener("input", (e) => {
-  inputContent = e.target.value;
-});
+  let chatHistory = [];
 
-sendButton.addEventListener("click", async () => {
-  if (!inputContent.trim()) return;
+  // Function to fetch locations and populate the select options
+  async function fetchLocations() {
+      try {
+          const response = await axios.get(
+              'http://localhost/flightsteam-back-end/api/locations/getAll.php',
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
 
-  addMessageToChat("User", inputContent);
+          const locations = response.data.data.locations;
 
-  chat.push({
-    role: "user",
-    content: inputContent,
+          locations.forEach((location) => {
+              const option = document.createElement('option');
+              option.value = location.location_id;
+              option.text = `${location.city_name} (${location.city_code})`;
+              departureSelect.appendChild(option.cloneNode(true));
+              arrivalSelect.appendChild(option);
+          });
+      } catch (error) {
+          console.error('Error fetching locations:', error);
+      }
+  }
+
+  // Function to fetch available hotels and taxis for the arrival location
+  async function fetchAdditionalInfo(arrivalLocation) {
+      try {
+          const hotelsResponse = await axios.get(
+              `http://localhost/flightsteam-back-end/api/hotels/getByLocationId.php?location_id=${arrivalLocation}`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+
+          const taxisResponse = await axios.get(
+              `http://localhost/flightsteam-back-end/api/taxis/getByLocationId.php?location_id=${arrivalLocation}`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+
+          const hotels = hotelsResponse.data.data.hotels
+              .map((hotel) => hotel.name)
+              .join(', ');
+          const taxis = taxisResponse.data.data.taxis
+              .map((taxi) => taxi.name)
+              .join(', ');
+
+          return { hotels, taxis };
+      } catch (error) {
+          console.error('Error fetching additional info:', error);
+          return { hotels: '', taxis: '' };
+      }
+  }
+
+  // Function to update chat UI
+  function updateChatUI() {
+      chatContainer.innerHTML = '';
+      chatHistory.forEach(chat => {
+          const messageElement = document.createElement('div');
+          messageElement.classList.add(chat.sender === 'user' ? 'user-message' : 'assistant-message');
+          messageElement.textContent = chat.message;
+          chatContainer.appendChild(messageElement);
+      });
+  }
+
+  // Event listener for form submission
+  travelForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const departureLocation =
+          departureSelect.options[departureSelect.selectedIndex].text;
+      const arrivalLocation =
+          arrivalSelect.options[arrivalSelect.selectedIndex].text;
+      const budget = document.getElementById('budget').value;
+      const days = document.getElementById('days').value;
+
+      const additionalInfo = await fetchAdditionalInfo(arrivalSelect.value);
+
+      const message = `You are my tourist guide. Give me the best plan trip of my life with the following details:
+      Departure Location: ${departureLocation}
+      Arrival Location: ${arrivalLocation}
+      Budget: ${budget}
+      Number of Days: ${days}
+      Available Hotels: ${additionalInfo.hotels}
+      Available Taxis: ${additionalInfo.taxis}`;
+
+      // Add user message to chat history and update UI
+      chatHistory.push({ message, sender: 'user' });
+      updateChatUI();
+
+      // Send the message to the backend
+      try {
+          const response = await axios.post(
+              'http://localhost/flightsteam-back-end/api/chatlogs/chat.php',
+              { message },
+              {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+
+          // Add assistant response to chat history and update UI
+          chatHistory.push({ message: response.data.response, sender: 'assistant' });
+          updateChatUI();
+      } catch (error) {
+          console.error('Error sending message:', error);
+      }
   });
 
-  // Save user message to the backend
-  await saveChatLog("user", inputContent);
-
-  try {
-    const { data } = await axios.post("https://api.openai.com/v1/chat/completions", {
-      model: "gpt-3.5-turbo",
-      messages: [...chat],
-      temperature: 0.7,
-    }, {
-      headers: {
-        Authorization: "Bearer token",
-        "Content-Type": "application/json"
-      },
-    });
-
-    const assistantMessage = data.choices[0].message.content;
-
-    addMessageToChat("Assistant", assistantMessage);
-
-    chat.push({
-      role: "assistant",
-      content: assistantMessage,
-    });
-
-    // Save assistant message to the backend
-    await saveChatLog("bot", assistantMessage);
-
-    chatInput.value = "";
-    inputContent = "";
-  } catch (error) {
-    console.error("An error occurred while calling the OpenAI API:", error);
-  }
+  fetchLocations(); // Populate the select options with locations on page load
 });
 
-tripForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const arrivalAirport = document.getElementById("arrival_airport_id").value;
-  const duration = document.getElementById("duration").value;
-  const time = document.getElementById("time").value;
-
-  const tripDetails = `give me a plan for my trip.Trip Details: Arrival Airport - ${arrivalAirport}, Duration - ${duration} days, Time of Year - ${time}`;
-  
-  addMessageToChat("User", tripDetails);
-
-  chat.push({
-    role: "user",
-    content: tripDetails,
-  });
-
-  // Save trip details to the backend
-  await saveChatLog("user", tripDetails);
-
-  try {
-    const { data } = await axios.post("https://api.openai.com/v1/chat/completions", {
-      model: "gpt-3.5-turbo",
-      messages: [...chat],
-      temperature: 0.7,
-    }, {
-      headers: {
-        Authorization: "Bearer token",
-        "Content-Type": "application/json"
-      },
-    });
-
-    const assistantMessage = data.choices[0].message.content;
-
-    addMessageToChat("Assistant", assistantMessage);
-
-    chat.push({
-      role: "assistant",
-      content: assistantMessage,
-    });
-
-    // Save assistant message to the backend
-    await saveChatLog("bot", assistantMessage);
-
-  } catch (error) {
-    console.error("An error occurred while calling the OpenAI API:", error);
-  }
-});
-
-const saveChatLog = async (sender, message) => {
-  try {
-    await axios.post("http://localhost/flightsteam-back-end/api/chatlogs/create.php", {
-      user_id: userId,
-      message: message,
-      sender: sender
-    });
-  } catch (error) {
-    console.error("An error occurred while saving the chat log:", error);
-  }
-};
-
-const loadMessages = async () => {
-  try {
-    const response = await axios.get(`http://localhost/flightsteam-back-end/api/chatlogs/get.php?user_id=${userId}`);
-    const chatLogs = response.data.chatlogs;
-    chatContainer.innerHTML = "";
-
-    chatLogs.forEach(log => {
-      addMessageToChat(log.sender === "user" ? "User" : "Assistant", log.message);
-    });
-  } catch (error) {
-    console.error("An error occurred while loading the chat logs:", error);
-  }
-};
-
-const addMessageToChat = (role, message) => {
-  chatContainer.innerHTML += `<div>
-    <h4>${role}:</h4>
-    <p>${message}</p>
-  </div>`;
-};
-
-loadMessages();
-
-const fetchAndPopulateLocations = async () => {
-  try {
-    const response = await axios.get("http://localhost/flightsteam-back-end/api/locations/getAll.php");
-
-    const locations = response.data.locations;
-
-    const arrivalSelect = document.getElementById("arrival_airport_id");
-
-    locations.forEach((location) => {
-
-
-      const arrivalOption = document.createElement("option");
-      arrivalOption.value = location.city_name;
-      arrivalOption.text = `${location.city_name} (${location.city_code})`;
-      arrivalSelect.appendChild(arrivalOption);
-    });
-  } catch (error) {
-    console.error("An error occurred while fetching locations:", error);
-  }
-};
-
-fetchAndPopulateLocations();
+// Function to get a cookie value by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
