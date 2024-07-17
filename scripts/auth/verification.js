@@ -56,7 +56,7 @@ document.getElementById('otpForm').addEventListener('submit', async function (e)
             // alert('OTP verification successful');
             // Redirect to the next page or show success message
             localStorage.removeItem('email')
-            window.location.href = 'index.html';
+            window.location.href = '/index.html';
 
         } else {
             alert(result.message);

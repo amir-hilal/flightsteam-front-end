@@ -24,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
         if (response.ok && result.status === 200) {
             document.cookie = `token=${result.data.token}; Max-Age=${60 * 60}; path=/`;
-            window.location.href = 'index.html';
+            window.location.href = '/index.html';
         } else {
             alert(result.message);
         }

@@ -26,21 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (token) {
       // User is logged in
       navbarLinks.innerHTML = `
-        <a href="index.html" class="active-link">Home</a>
-        <a href="chatbot.html">Flightsteam AI</a>
+        <a href="/index.html" class="active-link">Home</a>
+        <a href="/pages/common/chatbot.html">Flightsteam AI</a>
         <a href="#" id="logout">Log out</a>
       `;
       document.getElementById("logout").addEventListener("click", () => {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        window.location.href = 'index.html';
+        window.location.href = '/index.html';
       });
     } else {
       // User is not logged in
       navbarLinks.innerHTML = `
-        <a href="index.html" class="active-link">Home</a>
-        <a href="chatbot.html">Flightsteam AI</a>
-        <a href="login.html">Log in</a>
-        <a href="register.html">Sign up</a>
+        <a href="/index.html" class="active-link">Home</a>
+        <a href="/pages/common/chatbot.html">Flightsteam AI</a>
+        <a href="/pages/common/login.html">Log in</a>
+        <a href="/pages/common/register.html">Sign up</a>
       `;
     }
   }
@@ -201,10 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = getCookie("token");
         if (token) {
           // User is logged in, redirect to bookflight page
-          window.location.href = `bookflight.html?flight_id=${flight.flight_id}`;
+          window.location.href = `/pages/user/bookflight.html?flight_id=${flight.flight_id}`;
         } else {
           // User is not logged in, redirect to login page
-          window.location.href = 'login.html';
+          window.location.href = '/pages/commonlogin.html';
         }
       });
     });

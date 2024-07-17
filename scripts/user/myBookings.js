@@ -1,18 +1,38 @@
+
+function isJWT(token) {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return false;
+  }
+
+  try {
+    const header = JSON.parse(atob(parts[0]));
+    const payload = JSON.parse(atob(parts[1]));
+
+    // Additional checks can be done here to ensure the payload contains expected fields
+    return typeof header === 'object' && typeof payload === 'object';
+  } catch (e) {
+    return false;
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 document.addEventListener('DOMContentLoaded', () => {
   const bookingListElement = document.getElementById('booking-list');
   document.getElementById('back-button').addEventListener('click', () => {
-    window.location.href = 'index.html';
+    window.location.href = '/index.html';
   });
 
   // Fetch bookings
-  const token = getCookie('token');
-
-  if (!token) {
-    displayMessage('You must be logged in to view your bookings.', 'error');
-    window.location.href = 'login.html';
+  if (!token || !isJWT(token)) {
+    window.location.href = '/pages/common/login.html';
     return;
   }
-
   Promise.all([
     fetch(
       'http://localhost/flightsteam-back-end/api/users/getFlightBookings.php',

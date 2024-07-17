@@ -1,3 +1,27 @@
+function isJWT(token) {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return false;
+  }
+
+  try {
+    const header = JSON.parse(atob(parts[0]));
+    const payload = JSON.parse(atob(parts[1]));
+
+    // Additional checks can be done here to ensure the payload contains expected fields
+    return typeof header === 'object' && typeof payload === 'object';
+  } catch (e) {
+    return false;
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const taxiBookingForm = document.getElementById('taxi-booking-form');
   const skipButton = document.getElementById('skip-button');
@@ -10,14 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const today = new Date().toISOString().split('T')[0];
   let selectedTaxiId = null;
   let taxis = [];
+  const token = getCookie('token');
+
+  if (!token || !isJWT(token)) {
+    window.location.href = '/pages/common/login.html';
+    return;
+  }
 
   // Set minimum pickup date to today
   pickupDateInput.setAttribute('min', today);
 
   // Fetch available locations
   fetch('http://localhost/flightsteam-back-end/api/locations/getAll.php')
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       if (data.status === 'success') {
         const locations = data.locations;
         populateLocationOptions(locations);
@@ -25,15 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         displayMessage('Error loading locations.', 'error');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error fetching locations:', error);
-      displayMessage('Error loading locations. Please try again later.', 'error');
+      displayMessage(
+        'Error loading locations. Please try again later.',
+        'error'
+      );
     });
 
   // Fetch available taxis
   fetch('http://localhost/flightsteam-back-end/api/taxis/getAll.php')
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       if (data.status === 'success') {
         taxis = data.taxis;
         renderTaxis(taxis);
@@ -41,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
         displayMessage('Error loading taxis.', 'error');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error fetching taxis:', error);
       displayMessage('Error loading taxis. Please try again later.', 'error');
     });
 
   // Populate location options
   function populateLocationOptions(locations) {
-    locations.forEach(location => {
+    locations.forEach((location) => {
       const option = document.createElement('option');
       option.value = location.location_id;
       option.textContent = `${location.city_name}, ${location.country} (${location.city_code})`;
@@ -62,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render taxis
   function renderTaxis(taxis, disableButtons = true) {
     taxiListElement.innerHTML = '';
-    taxis.forEach(taxi => {
+    taxis.forEach((taxi) => {
       const taxiElement = document.createElement('div');
       taxiElement.classList.add('taxi');
       taxiElement.innerHTML = `
@@ -70,22 +103,30 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>Car type: ${taxi.car_type}</p>
         <p>Price per km: $${taxi.price_per_km}</p>
         <p>Pickup location: ${taxi.city_name}, ${taxi.country}</p>
-        <button class="btn-select-taxi" data-taxi-id="${taxi.taxi_id}" ${disableButtons ? 'disabled' : ''}>Select Taxi</button>
+        <button class="btn-select-taxi" data-taxi-id="${taxi.taxi_id}" ${
+        disableButtons ? 'disabled' : ''
+      }>Select Taxi</button>
       `;
       taxiListElement.appendChild(taxiElement);
 
-      taxiElement.querySelector('.btn-select-taxi').addEventListener('click', () => {
-        selectedTaxiId = taxi.taxi_id;
-        selectedTaxiInfo.innerHTML = `
+      taxiElement
+        .querySelector('.btn-select-taxi')
+        .addEventListener('click', () => {
+          selectedTaxiId = taxi.taxi_id;
+          selectedTaxiInfo.innerHTML = `
           <h3>Selected Taxi: ${taxi.company_name}</h3>
           <p>Car type: ${taxi.car_type}</p>
           <p>Price per km: $${taxi.price_per_km}</p>
           <p>Pickup location: ${taxi.city_name}, ${taxi.country}</p>
           <button class="btn-unselect">Deselect Taxi</button>
         `;
-        selectedTaxiInfo.querySelector('.btn-unselect').addEventListener('click', deselectTaxi);
-        document.getElementById('taxi-booking-form-section').scrollIntoView({ behavior: 'smooth' });
-      });
+          selectedTaxiInfo
+            .querySelector('.btn-unselect')
+            .addEventListener('click', deselectTaxi);
+          document
+            .getElementById('taxi-booking-form-section')
+            .scrollIntoView({ behavior: 'smooth' });
+        });
     });
   }
 
@@ -109,15 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
       taxi_id: selectedTaxiId,
       pickup_location_id: formData.get('pickup-location'),
       dropoff_location_id: formData.get('dropoff-location'),
-      pickup_time: `${formData.get('pickup-date')} ${formData.get('pickup-time')}:00`,
-      status: 'confirmed'
+      pickup_time: `${formData.get('pickup-date')} ${formData.get(
+        'pickup-time'
+      )}:00`,
+      status: 'confirmed',
     };
 
     const token = getCookie('token');
 
     if (!token) {
       displayMessage('You must be logged in to book a taxi.', 'error');
-      window.location.href = 'login.html';
+      window.location.href = '/pages/common/login.html';
       return;
     }
 
@@ -125,22 +168,24 @@ document.addEventListener('DOMContentLoaded', () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(bookingData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.status === 201) {
           displayMessage('Booking successful!', 'success');
-          localStorage.setItem('taxiBookingDetails', JSON.stringify(data.booking));
-          window.location.href = 'myBookings.html';
-
+          localStorage.setItem(
+            'taxiBookingDetails',
+            JSON.stringify(data.booking)
+          );
+          window.location.href = '/pages/user/myBookings.html';
         } else {
           displayMessage('Booking failed: ' + data.message, 'error');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error booking taxi:', error);
         displayMessage('Booking failed. Please try again later.', 'error');
       });
@@ -148,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle skip button
   skipButton.addEventListener('click', () => {
-    window.location.href = 'nextPage.html'; // Replace with the actual next page
+    console.log('ecet');
+    window.location.href = '/pages/user/myBookings.html'; // Replace with the actual next page
   });
 
   // Filter taxis by name and pickup location
@@ -159,9 +205,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameFilter = filterByNameInput.value.toLowerCase();
     const locationFilter = pickupLocationSelect.value;
 
-    const filteredTaxis = taxis.filter(taxi => {
-      return taxi.company_name.toLowerCase().includes(nameFilter) &&
-             (!locationFilter || taxi.available_location_id === parseInt(locationFilter));
+    const filteredTaxis = taxis.filter((taxi) => {
+      return (
+        taxi.company_name.toLowerCase().includes(nameFilter) &&
+        (!locationFilter ||
+          taxi.available_location_id === parseInt(locationFilter))
+      );
     });
 
     const disableButtons = locationFilter === '';

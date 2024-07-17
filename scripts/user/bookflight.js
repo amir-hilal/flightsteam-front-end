@@ -1,3 +1,27 @@
+function isJWT(token) {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return false;
+  }
+
+  try {
+    const header = JSON.parse(atob(parts[0]));
+    const payload = JSON.parse(atob(parts[1]));
+
+    // Additional checks can be done here to ensure the payload contains expected fields
+    return typeof header === 'object' && typeof payload === 'object';
+  } catch (e) {
+    return false;
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const flightDetailsElement = document.getElementById('flight-details');
   const bookingForm = document.getElementById('booking-form');
@@ -6,6 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const flightId = urlParams.get('flight_id');
 
+  const token = getCookie('token');
+
+  if (!token || !isJWT(token)) {
+    window.location.href = '/pages/common/login.html';
+    return;
+  }
+
+  
   if (flightId) {
     fetch(`http://localhost/flightsteam-back-end/api/flights/get.php?id=${flightId}`)
       .then(response => response.json())
@@ -55,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!token) {
       alert('You must be logged in to book a flight.');
-      window.location.href = 'login.html';
+      window.location.href = '/pages/common/login.html';
       return;
     }
 
@@ -71,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         if (data.data.status === 'success') {
           alert('Booking successful!');
-          window.location.href = 'bookhotel.html';
+          window.location.href = '/pages/user/bookhotel.html';
         } else {
           alert('Booking failed: ' + data.message);
         }

@@ -1,6 +1,6 @@
 document.getElementById('registrationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    console.log("yaaaa")
+
 
     // Clear previous error messages
     document.querySelectorAll('.error-message').forEach(function (element) {
@@ -13,7 +13,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     const lastName = document.getElementById('lName').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const phoneNumber = document.getElementById('phone').value; // Add a phone input field in the form if it's required 
+    const phoneNumber = document.getElementById('phone').value; // Add a phone input field in the form if it's required
     // Basic client-side validation
     if (firstName == "") {
         document.getElementById('first_name_message').textContent = 'First name is required';
@@ -65,14 +65,14 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
         if (response.ok && result.status === 200) {
             localStorage.setItem('email', data['email']);
-            window.location.href = 'verification.html'
+            window.location.href = '/pages/common/verification.html'
         } else {
             alert(result.message );
         }
     } catch (error) {
         alert('An error occurred: ' + error.message);
     } finally{
-        
+
         document.getElementById('loadingOverlay').classList.add('hidden');
         enableInteractions();
     }

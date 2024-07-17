@@ -1,3 +1,27 @@
+function isJWT(token) {
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    return false;
+  }
+
+  try {
+    const header = JSON.parse(atob(parts[0]));
+    const payload = JSON.parse(atob(parts[1]));
+
+    // Additional checks can be done here to ensure the payload contains expected fields
+    return typeof header === 'object' && typeof payload === 'object';
+  } catch (e) {
+    return false;
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const hotelListElement = document.getElementById('hotel-list');
   const selectedHotelInfo = document.getElementById('selected-hotel-info');
@@ -9,6 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkOutDateInput = document.getElementById('check-out-date');
   let selectedHotelId = null;
   let hotelsData = [];
+
+  const token = getCookie('token');
+
+  if (!token || !isJWT(token)) {
+    window.location.href = '/pages/common/login.html';
+    return;
+  }
+
 
   // Fetch available hotels
   fetch('http://localhost/flightsteam-back-end/api/hotels/getAll.php')
@@ -129,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!token) {
       displayMessage('You must be logged in to book a hotel.', 'error');
-      window.location.href = 'login.html';
+      window.location.href = '/pages/common/login.html';
       return;
     }
 
@@ -146,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.status === 200) {
           displayMessage('Booking successful!', 'success');
           localStorage.setItem('hotelBookingDetails', JSON.stringify(data.bookingDetails));
-          window.location.href = 'booktaxi.html';
+          window.location.href = '/pages/user/booktaxi.html';
         } else {
           displayMessage('Booking failed: ' + data.message, 'error');
         }
@@ -159,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle skip button
   skipButton.addEventListener('click', () => {
-    window.location.href = 'bookTaxi.html';
+    window.location.href = '/pages/user/bookTaxi.html';
   });
 
   // Helper function to display messages
