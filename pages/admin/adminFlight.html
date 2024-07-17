@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Flights</title>
+    <link rel="stylesheet" href="../../styles/adminFlight.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" id="sidebar">
+            <h1 class="sidebar-heading">Navigation Bar</h1>
+            <div class="sidebar-menu">
+                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="adminDashboard.html">Dashboard</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="adminUsersList.html">Users</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="adminFlight.html">Flights</a></h3>
+            </div>
+        </div>
+        <div class="content">
+            <nav class="navbar">
+                <button class="toggle-button" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search">
+                    <i class="fa fa-search"></i>
+                </div>
+                <div class="nav-icons">
+                    <i class="fa fa-bell"></i>
+                    <i class="fa fa-user"></i>
+                </div>
+            </nav>
+            <div class="main-content">
+                <div class="flights-header">
+                    <h1>Flights</h1>
+                    <div class="flights-actions">
+                        <button class="add-button" onclick="openModal()">Add</button>
+                    </div>
+                </div>
+                <table class="flights-table">
+                    <thead>
+                        <tr>
+                            <td>Code</td>
+                            <td>Company</td>
+                            <td>Dep.</td>
+                            <td>Arr.</td>
+                            <td>Dep T.</td>
+                            <td>Arr T.</td>
+                            <td>Price</td>
+                            <td>Seats</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Add New Flight</h2>
+            <h6>Flight Number must be like AA999 or BBB111</h6>
+            <form id="addFlightForm" class="modal-form">
+                <div class="form-group">
+                    <label for="flight_number">Flight Number</label>
+                    <input type="text" id="flight_number" name="flight_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="company_id">Company</label>
+                    <select id="company_id" name="company_id" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departure_airport_id">Departure Airport</label>
+                    <select id="departure_airport_id" name="departure_airport_id" required>
+                        <option value=""></option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="arrival_airport_id">Arrival Airport</label>
+                    <select id="arrival_airport_id" name="arrival_airport_id" required>
+                        <option value=""></option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departure_time">Departure Time</label>
+                    <input type="datetime-local" id="departure_time" name="departure_time" required>
+                </div>
+                <div class="form-group">
+                    <label for="arrival_time">Arrival Time</label>
+                    <input type="datetime-local" id="arrival_time" name="arrival_time" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="available_seats">Available Seats</label>
+                    <input type="number" id="available_seats" name="available_seats" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Add Flight</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../../scripts/admin/adminFlight.js"></script>
+    <script src="../../scripts/admin/auth.js"></script>
+</body>
+</html>

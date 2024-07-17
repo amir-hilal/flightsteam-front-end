@@ -1,0 +1,178 @@
+@media screen and (max-width: 1205px) {
+  .ticket-flight-filter {
+    height: 19rem;
+  }
+  .btn-search {
+    margin-top: 1rem;
+    flex-direction: row;
+    width: 8rem;
+    height: 3rem;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .ticket {
+    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .btn-open-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 6rem 3rem;
+    align-items: center;
+    z-index: 2;
+    right: -10px;
+    top: 0px;
+    height: 100vh;
+    width: 20rem;
+    background-color: var(--primary-color);
+    transition: all 0.5s;
+  }
+
+  .menu a {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+
+  .btn-close-menu {
+    display: block;
+    z-index: 3;
+    color: #fff;
+    background: none;
+    border: none;
+    right: 2rem;
+    top: 10px;
+    position: absolute;
+    transition: all 0.5s;
+  }
+
+  .menu :last-child {
+    color: var(--primary-color);
+    background-color: #fff;
+    padding: 7px;
+    border: none;
+    border-radius: 6px;
+  }
+
+  .closed {
+    right: -20rem;
+    transition: all 0.5s;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .ticket-filter {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+
+  .ticket-flight-filter {
+    height: 20rem;
+  }
+
+  .ticket {
+    width: 95%;
+    font-size: 1rem;
+    grid-template-columns: 0.3fr 1fr 1fr 1fr;
+  }
+
+  .ticket span {
+    font-size: 1rem;
+  }
+
+  .btn-search {
+    padding: 1rem;
+  }
+
+  .duration,
+  .direction {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .ticket-flight-filter {
+    height: 21rem;
+  }
+
+  .search {
+    font-size: 0.8rem;
+  }
+  .search span {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .ticket-flight-filter {
+    height: 19rem;
+  }
+
+  .ticket-filter {
+    font-size: 0.6rem;
+    padding: 0.6rem;
+  }
+
+  .ticket {
+    width: 100%;
+    font-size: 0.7rem;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr;
+  }
+
+  .company p {
+    font-size: 1rem;
+  }
+
+  .filters :first-child .filter-icon {
+    color: var(--primary-color);
+    background: none;
+  }
+
+  .filter-icon {
+    padding: 0;
+    color: var(--secondary-color);
+    background: none;
+  }
+
+  .btn-search {
+    padding: 0.8rem;
+    width: 6rem;
+  }
+  .btn-search p {
+    display: none;
+  }
+
+  button {
+    font-size: 9px;
+  }
+
+  .search {
+    font-size: 0.6rem;
+  }
+  .search span {
+    font-size: 0.6rem;
+  }
+
+  .search input {
+    width: 8rem;
+  }
+}

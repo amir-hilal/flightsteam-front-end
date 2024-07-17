@@ -1,0 +1,391 @@
+:root {
+  --primary-color: #d25134;
+  --secondary-color: #36454f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url(/assets/images/plane.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+button,
+a,
+select {
+  cursor: pointer;
+}
+
+button:hover,
+a:hover {
+  scale: 1.05 !important;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 1rem;
+  border: 1px solid #000;
+}
+
+li p {
+  width: 15rem;
+  text-align: center;
+}
+
+.navbar {
+  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar h2 {
+  color: var(--secondary-color);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.navbar-links a {
+  color: #000;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.navbar-links :last-child {
+  color: white;
+  background-color: var(--primary-color);
+  padding: 7px;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-open-menu {
+  position: absolute;
+  display: none;
+  right: 2rem;
+}
+
+.menu {
+  position: absolute;
+  display: none;
+}
+
+.btn-close-menu {
+  display: none;
+  position: absolute;
+}
+
+.ticket-flight-filter {
+  align-self: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: #ffffff99;
+  backdrop-filter: blur(20px);
+  width: 90%;
+  height: 15rem;
+  border-radius: 15px;
+  box-shadow: 0px 10px 40px -10px var(--secondary-color);
+}
+
+.btn-group {
+  display: flex;
+  gap: 3rem;
+  padding: 0.5rem;
+}
+
+.btn-group button {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: none;
+  border: none;
+}
+
+button.active {
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.filters.hide,
+.tickets.hide,
+.search.hide,
+.flights.hide {
+  position: absolute;
+  z-index: -1;
+  transform: translatex(50rem);
+  bottom: 25px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.filters {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: space-evenly;
+  transition: all 0.5s;
+}
+
+.filters :first-child {
+  display: flex;
+}
+
+#departure {
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+}
+#arrival {
+  border-radius: 0px 8px 8px 0;
+}
+
+.ticket-filter {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.5rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+
+.ticket-filter select {
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.ticket-filter :last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-icon {
+  padding: 8px;
+  text-align: center;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border-radius: 50%;
+}
+
+.filters :first-child .filter-icon {
+  background-color: var(--primary-color);
+}
+
+.btn-search {
+  margin-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  height: 100px;
+  padding: .9rem .4rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-search:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+
+
+
+#date-input {
+  border: none;
+  width: 130px;
+  background: none;
+  font-size: 0.9rem;
+}
+
+#select-passengers{
+  width: 130px;
+}
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  transition: all 0.5s;
+}
+
+
+.ticket {
+  padding: 20px;
+  border-radius: 15px;
+  display: grid;
+  margin: 0 0 2rem 0;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  box-shadow: 0px 0px 30px -7px var(--secondary-color);
+}
+
+.ticket span {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  grid-row: 1 / -1;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.ticket button {
+  grid-row: -2 / -1;
+  width: fit-content;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.btn-info {
+  background: none;
+}
+.btn-book {
+  grid-column: -2 / -1;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+}
+
+.search {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  transition: all 0.5s;
+}
+
+.search span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.direction {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.search input {
+  padding: 0.5rem;
+  width: 15rem;
+}
+
+.search button {
+  padding: 10px;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+}
+
+.flights {
+  padding: 2rem;
+  align-self: center;
+  width: 95%;
+  transition: all 0.5s;
+}
+
+.flights-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-titles {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.select-city {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.select-city select {
+  padding: 0.4rem;
+  border: none;
+  color: #fff;
+  background-color: var(--primary-color);
+  border-radius: 6px;
+}
+
+.ticket-filter input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.ticket-filter input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.ticket-filter datalist {
+  display: none !important;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: hidden;
+}
+
+
+
+.ticket-filter option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+

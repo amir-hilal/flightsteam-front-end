@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../../styles/login.css" />
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="form">
+        <img src="../../assets/images/image.jpg" class="img" />
+        <div class="login">
+          <form action="/login" method="post" id="loginForm">
+            <div class="spacing">
+              <a href="/index.html">Back</a>
+              <p>Admin Pages</p>
+              <p class="header">Log in to your Account</p>
+              <label>E-mail</label>
+              <input
+                type="email"
+                required
+                placeholder="example@gmail.com"
+                id="email"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                required
+                placeholder="********"
+                id="password"
+              />
+
+              <button type="submit" class="login-btn">Log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../../scripts/admin/adminLogin.js"></script>
+    <script src="../../scripts/admin/auth.js"></script>
+
+  </body>
+</html>

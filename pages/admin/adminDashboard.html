@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../../styles/adminDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="sidebar" id="sidebar">
+            <h1 class="sidebar-heading">Navigation Bar</h1>
+            <div class="sidebar-menu">
+                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="adminDashboard.html">Dashboard</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="adminUsersList.html">Users</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="adminFlight.html">Flights</a></h3>
+            </div>
+        </div>
+
+        <div class="content">
+            <nav class="navbar">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search"><i class="fa fa-search "></i>
+                </div>
+                <div class="nav-icons">
+                    <i class="fa fa-bell"></i>
+                    <i class="fa fa-user"></i>
+                </div>
+            </nav>
+            <div class="container">
+                <h1 class="dashboard-title">Dashboard</h1>
+                <div class="cards">
+                    <div class="card" id="totalBookingsCard">
+                        <i class="fa fa-plane card-icon"></i>
+                        <h5 class="card-title">Total Bookings</h5>
+                        <p class="card-text">Loading...</p>
+                    </div>
+                  
+                    <div class="card" id="totalUsersCard">
+                        <i class="fa fa-users card-icon"></i>
+                        <h5 class="card-title">Total Users</h5>
+                        <p class="card-text">Loading...</p>
+                    </div>
+                </div>
+                <div class="hotels-card">
+                    <h1 class="card-title">Total Visits</h1>
+                    <canvas id="roomsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../scripts/admin/adminDashboard.js"></script>
+    <script src="../../scripts/admin/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Ticket</title>
+    <link rel="stylesheet" href="../../styles/bookflight.css" />
+    <link rel="stylesheet" href="../../styles/landingPage.css" />
+    <link rel="stylesheet" href="../../styles/mediaQueryLanding.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav class="navbar">
+          <h2>FLIGHTSTEAM</h2>
+          <div class="navbar-links">
+            <a href="/index.html">Home</a>
+            <a href="chatbot.html">Flightsteam AI</a>
+            <a href="#" id="logout">Log out</a>
+          </div>
+          <button class="btn-open-menu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7142857142857142"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-align-justify"
+            >
+              <line x1="3" x2="21" y1="6" y2="6" />
+              <line x1="3" x2="21" y1="12" y2="12" />
+              <line x1="3" x2="21" y1="18" y2="18" />
+            </svg>
+          </button>
+          <button class="btn-close-menu closed">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+          <div class="menu closed">
+            <a href="/index.html">Home</a>
+            <a href="chatbot.html">Flightsteam AI</a>
+            <a href="login.html">Log in</a>
+            <a href="register.html">Sign up</a>
+          </div>
+        </nav>
+      </header>
+
+      <section class="booking-section">
+        <h1>Book Your Flight</h1>
+        <div class="flight-details" id="flight-details">
+          <!-- Flight details will be rendered here by JavaScript -->
+        </div>
+        <div class="passenger-info">
+          <h2>Number of Tickets</h2>
+          <form id="booking-form">
+            <div class="form-group">
+              <input type="number" id="seats" name="seats" min="1" required />
+            </div>
+            <button type="submit" class="btn-book">Confirm Booking</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="../../scripts/user/bookflight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+  </body>
+</html>
