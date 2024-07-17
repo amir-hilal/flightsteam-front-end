@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
           flightsData = data.data.flights;
           renderFlights(flightsData);
           renderFlightsList(flightsData);
-          console.log('populating');
         } else {
           flightsContainer.innerHTML = '<p>No flights found.</p>';
         }
@@ -149,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
       arrivalDatalist.appendChild(option);
     });
 
-    console.log(arrivalDatalist, departureDatalist);
   }
 
   function renderFlights(flights) {
@@ -228,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${new Date(flight.departure_time).toLocaleString()} - ${new Date(flight.arrival_time).toLocaleString()}</p>
       `;
       flightsList.appendChild(flightElement);
-      console.log(flightElement)
     });
   }
 

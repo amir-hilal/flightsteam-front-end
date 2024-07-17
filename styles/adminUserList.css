@@ -63,7 +63,7 @@ body {
     width: 80vw;
     height: 100vh;
     background-color: #f8f9fa;
-    
+
 
 }
 .navbar {
@@ -91,40 +91,40 @@ body {
 .search-box {
     display: flex;
     align-items: center;
-    max-width: 500px; 
+    max-width: 500px;
     flex-grow: 1;
-    padding: 5px; 
-    border: 1px solid #ced4da; 
-    border-radius: 4px; 
-    background-color: #fff; 
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
 }
 
 .search-input {
     width: 100%;
     padding: 10px;
-    border: none; 
-    outline: none; 
-    font-size: 16px; 
+    border: none;
+    outline: none;
+    font-size: 16px;
 }
 
 .search-icon {
-    margin-left: 10px; 
-    color: #ced4da; 
-    cursor: pointer; 
+    margin-left: 10px;
+    color: #ced4da;
+    cursor: pointer;
 }
 .main-content {
     padding: 20px;
     background-color: #fff;
 }
 
-.flights-header {
+.admins-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.flights-header h1 {
+.admins-header h1 {
     margin: 0;
     font-size: 24px;
 }
@@ -135,8 +135,8 @@ body {
 }
 
 .add-button, .filter-button {
-    background-color:white;
-    color: black;
+    background-color: #36454F;
+    color: white;
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
@@ -151,18 +151,18 @@ body {
 
 
 
-.flights-table {
+.admins-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.flights-table th, .flights-table td {
+.admins-table th, .admins-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.flights-table th {
+.admins-table th {
     background-color: #f2f2f2;
 }
 
@@ -184,7 +184,7 @@ body {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #000; 
+    color: #000;
 }
 @media (max-width: 768px) {
     .sidebar {
@@ -206,3 +206,75 @@ body {
     }
 }
 
+/* Existing CSS for layout and styling */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    text-align: right;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    background-color: #45a049;
+}

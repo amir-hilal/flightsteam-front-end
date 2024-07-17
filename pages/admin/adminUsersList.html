@@ -6,42 +6,37 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../../styles/adminUserList.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
-
         <div class="sidebar" id="sidebar">
             <h1 class="sidebar-heading">Navigation Bar</h1>
             <div class="sidebar-menu">
-                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="#">Dashboard</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="#">Users</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-credit-card"></i><a href="#">Payments</a></h3>
-                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="#">Flights</a></h3>
-                <h3 class="sidebar-item"><i class="fas fa-user-shield"></i><a href="#">Admin Profile</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-home"></i><a href="adminDashboard.html">Dashboard</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-user"></i><a href="adminUsersList.html">Users</a></h3>
+                <h3 class="sidebar-item"><i class="fa fa-plane"></i><a href="adminFlight.html">Flights</a></h3>
             </div>
         </div>
-
         <div class="content">
             <nav class="navbar">
                 <button class="toggle-button" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
                 <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search"><i class="fa fa-search"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search"><i class="fa fa-search"></i>
                 </div>
                 <div class="nav-icons">
-                    <img src="../assets/lbFlag.png" alt="Flag" class="flag-icon">
-                    <span>English</span>
                     <i class="fa fa-bell"></i>
                     <i class="fa fa-user"></i>
                 </div>
             </nav>
             <div class="main-content">
-                <div class="flights-header">
+                <div class="admins-header">
                     <h1>Users</h1>
                     <div class="flights-actions">
-                        <button class="filter-button"><i class="fas fa-sliders-h"></i></button>
+                        <button class="add-button">Add Admin</button>
                     </div>
                 </div>
-                <table class="flights-table">
+                <table class="admins-table">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -49,40 +44,58 @@
                             <th>Middle Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>Phone Number</th>
+                            <th>Role</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example rows -->
-                        <tr>
-                            <td>1</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>john@example.com</td>
-                            <td>######</td>
-                            <td>+961 000000</td>
-                            <td><button class="del-button">DEL</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>John</td>
-                            <td>john@example.com</td>
-                            <td>######</td>
-                            <td>+961 000000</td>
-                            <td><button class="del-button">DEL</button></td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Add New Admin</h2>
+            <form id="addAdminForm" class="modal-form">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" id="middle_name" name="middle_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="admin">Admin</option>
+                        <option value="superadmin">Superadmin</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Add Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="../../scripts/admin/adminUsersList.js"></script>
+    <script src="../../scripts/admin/auth.js"></script>
 </body>
 </html>

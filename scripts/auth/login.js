@@ -1,5 +1,26 @@
+// Function to get a cookie value by name
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// On page load, check if the token exists
+document.addEventListener("DOMContentLoaded", function () {
+    const token = getCookie('token');
+    if (token) {
+        window.location.href = "/index.html";
+    }
+});
+
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
+
+    const token = getCookie('token');
+    if (token) {
+        window.location.href = '/index.html';
+        return;
+    }
 
     // Get form data
     const email = document.getElementById('email').value;
