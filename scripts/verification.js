@@ -53,9 +53,11 @@ document.getElementById('otpForm').addEventListener('submit', async function (e)
         const result = await response.json();
 
         if (response.ok && result.status === 200) {
-            alert('OTP verification successful');
+            // alert('OTP verification successful');
             // Redirect to the next page or show success message
+            localStorage.removeItem('email')
             window.location.href = 'index.html';
+
         } else {
             alert(result.message);
         }

@@ -69,9 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.status === 'success') {
+        if (data.data.status === 'success') {
           alert('Booking successful!');
-          window.location.href = 'index.html';
+          window.location.href = 'bookhotel.html';
         } else {
           alert('Booking failed: ' + data.message);
         }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Hotel</title>
+    <link rel="stylesheet" href="styles/bookhotel.css">
+    <link rel="stylesheet" href="styles/landingPage.css">
+</head>
+<body>
+    <main>
+
+        <section class="booking-section">
+          <h1>Book Your Hotel</h1>
+            <div class="optional-message">Optional (You Can Skipp)</div>
+            <button id="skip-button" class="btn-skip">Skip</button>
+            <div class="filters">
+                <input type="text" id="hotel-name-filter" placeholder="Filter by hotel name">
+                <select id="location-filter">
+                    <option value="">Filter by location</option>
+                </select>
+            </div>
+            <div class="hotel-list" id="hotel-list">
+                <!-- Hotel details will be rendered here by JavaScript -->
+            </div>
+            <div class="selected-hotel-info" id="selected-hotel-info">
+                <!-- Selected hotel details will be rendered here by JavaScript -->
+            </div>
+            <div class="booking-form">
+                <h2>Confirm Booking</h2>
+                <form id="hotel-booking-form">
+                    <div class="form-group">
+                        <label for="check-in-date">Check-in Date:</label>
+                        <input type="date" id="check-in-date" name="check-in-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out-date">Check-out Date:</label>
+                        <input type="date" id="check-out-date" name="check-out-date" required>
+                    </div>
+                    <button type="submit" class="btn-book">Confirm Booking</button>
+                </form>
+
+            </div>
+        </section>
+    </main>
+    <script src="scripts/bookhotel.js"></script>
+</body>
+</html>

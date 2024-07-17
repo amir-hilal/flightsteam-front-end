@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Taxi</title>
+    <link rel="stylesheet" href="styles/booktaxi.css">
+    <link rel="stylesheet" href="styles/landingPage.css">
+</head>
+<body>
+  <main>
+    <section class="booking-section">
+      <h1>Book Your Taxi</h1>
+      <div class="optional-message">Optional (You Can Skip)</div>
+      <button id="skip-button" class="btn-skip">Skip</button>
+
+
+      <div class="taxi-booking-form" id="taxi-booking-form-section">
+        <div class="filter-container">
+          <input type="text" id="filter-by-name" placeholder="Filter by taxi company name">
+
+        </div>
+        <form id="taxi-booking-form">
+          <div class="form-group">
+            <label for="pickup-location">Pickup Location:</label>
+            <select id="pickup-location" name="pickup-location" required>
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="taxi-list" id="taxi-list">
+            <!-- Taxi details will be rendered here by JavaScript -->
+          </div>
+          <div class="selected-taxi-info" id="selected-taxi-info">
+            <!-- Selected taxi details will be rendered here by JavaScript -->
+          </div>
+          <div class="form-group">
+            <label for="dropoff-location">Dropoff Location:</label>
+            <select id="dropoff-location" name="dropoff-location" required>
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pickup-date">Pickup Date:</label>
+            <input type="date" id="pickup-date" name="pickup-date" required>
+          </div>
+          <div class="form-group">
+            <label for="pickup-time">Pickup Time:</label>
+            <input type="time" id="pickup-time" name="pickup-time" required>
+          </div>
+          <button type="submit" class="btn-book">Confirm Booking</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="scripts/booktaxi.js"></script>
+</body>
+</html>
