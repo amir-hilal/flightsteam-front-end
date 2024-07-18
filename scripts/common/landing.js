@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href = `/pages/user/bookflight.html?flight_id=${flight.flight_id}`;
         } else {
           // User is not logged in, redirect to login page
-          window.location.href = '/pages/commonlogin.html';
+          window.location.href = '/pages/common/login.html';
         }
       });
     });
