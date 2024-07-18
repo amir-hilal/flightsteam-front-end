@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-    console.log('Fetching flights...');
 
     const modal = document.getElementById('addModal');
     const addButton = document.querySelector('.add-button');
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             );
 
-            console.log(response.data.data.flights);
+            // console.log(response.data.data.flights);
             const flights = response.data.data.flights;
 
             const table = document.querySelector('.flights-table tbody');
@@ -138,9 +137,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                 }
             );
-
-            const locations = response.data.data.locations;
-
+            const locations = response.data.locations;
+            console.log("responese:",response.data)
             console.log(locations);
             const departureSelect = document.getElementById('departure_airport_id');
             const arrivalSelect = document.getElementById('arrival_airport_id');
