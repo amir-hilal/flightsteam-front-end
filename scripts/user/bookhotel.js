@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle skip button
   skipButton.addEventListener('click', () => {
-    window.location.href = '/pages/user/bookTaxi.html';
+    window.location.href = '/pages/user/booktaxi.html';
   });
 
   // Helper function to display messages
