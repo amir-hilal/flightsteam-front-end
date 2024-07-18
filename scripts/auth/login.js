@@ -44,11 +44,12 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const result = await response.json();
 
         if (response.ok && result.status === 200) {
-            document.cookie = `token=${result.data.token}; Max-Age=${60 * 60}; path=/`;
+            document.cookie = `token=${result.data.token}; Max-Age=${60 * 60}; path=/; Secure; HttpOnly`;
             window.location.href = '/index.html';
         } else {
             alert(result.message);
         }
+
     } catch (error) {
         alert('An error occurred: ' + error.message);
     }
