@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = '/index.html';
   });
 
+  const token = getCookie('token')
+
   // Fetch bookings
   if (!token || !isJWT(token)) {
     window.location.href = '/pages/common/login.html';
