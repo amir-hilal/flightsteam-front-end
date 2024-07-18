@@ -97,13 +97,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       const additionalInfo = await fetchAdditionalInfo(arrivalSelect.value);
 
-      const message = `You are my tourist guide. Give me the best plan trip of my life with the following details:
+      const message = `You are my tourist guide. Give me the best plan trip of my life with the following details even if data is not suficient create an imaginary trip:
       Departure Location: ${departureLocation}
       Arrival Location: ${arrivalLocation}
       Budget: ${budget}
       Number of Days: ${days}
-      Available Hotels: ${additionalInfo.hotels}
-      Available Taxis: ${additionalInfo.taxis}`;
+      Available Hotels: ${additionalInfo.hotels}`;
 
       // Add user message to chat history and update UI
       chatHistory.push({ message, sender: 'user' });
@@ -122,8 +121,8 @@ document.addEventListener('DOMContentLoaded', async function () {
               }
           );
 
-          // Add assistant response to chat history and update UI
-          chatHistory.push({ message: response.data.response, sender: 'assistant' });
+        // Add assistant response to chat history and update UI
+          chatHistory.push({ message: response.data.data.response, sender: 'assistant' });
           updateChatUI();
       } catch (error) {
           console.error('Error sending message:', error);
