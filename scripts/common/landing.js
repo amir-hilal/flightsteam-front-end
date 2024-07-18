@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="/index.html" class="active-link">Home</a>
         <a href="/pages/common/chatbot.html">Flightsteam AI</a>
         <a href = "/pages/user/myBookings.html">My Bookings</a>
-        <a href="#" id="logout">Log out</a>
+        <a href="/pages/spline.html" id="logout">Log out</a>
       `;
       document.getElementById('logout').addEventListener('click', () => {
         document.cookie =
