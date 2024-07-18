@@ -17,6 +17,7 @@ function isJWT(token) {
 }
 
 function getCookie(name) {
+  console.log(document.cookie)
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
@@ -29,9 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const token = getCookie('token')
-
+  console.log('token',token)
+  if (token) {
+    console.log('tokne is here', token)
+  }
   // Fetch bookings
   if (!token || !isJWT(token)) {
+    console.log("not defiened")
     window.location.href = '/pages/common/login.html';
     return;
   }
