@@ -4,8 +4,9 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .form-container {
@@ -70,4 +71,29 @@ button:hover {
   background-color: #0056b3;
 }
 
+
+/* chatbot.css */
+.chat-container {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.user-message {
+  background-color: #e1f5fe;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.assistant-message {
+  background-color: #fff9c4;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: left;
+}
 
